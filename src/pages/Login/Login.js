@@ -1,9 +1,7 @@
-import React from "react";
+import React from 'react';
 
-const Login = () =>{
-  return(
-    <div>Main</div>
-  )
-}
+const Login = () => {
+  return <div>Main</div>;
+};
 
 export default Login;
