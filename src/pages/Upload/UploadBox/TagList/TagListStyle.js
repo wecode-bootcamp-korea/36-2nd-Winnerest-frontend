@@ -2,35 +2,21 @@ import styled from 'styled-components';
 
 export const ProductCheckList = styled.div`
   ${({ theme: { variables } }) => variables.flex('column')}
+  position: absolute;
+  width: 180px;
+  top: 100px;
+  right: -180px;
   padding: 15px;
-`;
-
-export const CheckList = styled.div`
-  ${({ theme: { variables } }) => variables.flex()}
-  font-size: 2px;
-`;
-
-export const SerchCategory = styled.button`
-  height: 60px;
-  width: 40px;
-  margin-bottom: 10px;
-  border: none;
-  border-radius: 8px;
-  background-color: ${({ theme: { style } }) => style.basicRed};
+  background-color: white;
   box-shadow: 0 0 8px rgb(0 0 0 / 10%);
-  font-size: 25px;
+  border-radius: 20px;
   outline: none;
-  cursor: pointer;
-  &:hover {
-    background-color: ${({ theme: { style } }) => style.hoverRed};
-  }
-  &:active {
-    background-color: ${({ theme: { style } }) => style.basicRed};
-  }
+  z-index: 20;
 `;
 
 export const CheckBoxList = styled.div`
   ${({ theme: { variables } }) => variables.flex('column', 'space-between')}
+  font-size: 2px;
 `;
 
 export const CheckBoxs = styled.div`

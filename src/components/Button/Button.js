@@ -31,7 +31,11 @@ const StyledButton = styled.button`
 
   ${sizeStyles}
 
+  ${position => position};
   ${width => width};
+  ${height => height};
+  ${left => left};
+  ${right => right};
 
   color: ${({ theme }) => theme.style.white};
   font-weight: bold;
@@ -62,13 +66,28 @@ const StyledButton = styled.button`
   }}
 `;
 
-function Button({ children, hoverColor, color, width, size, ...rest }) {
+function Button({
+  children,
+  position,
+  height,
+  hoverColor,
+  color,
+  width,
+  size,
+  right,
+  left,
+  ...rest
+}) {
   return (
     <StyledButton
       color={color}
       hoverColor={hoverColor}
       size={size}
       width={width}
+      height={height}
+      left={left}
+      right={right}
+      position={position}
       {...rest}
     >
       {children}

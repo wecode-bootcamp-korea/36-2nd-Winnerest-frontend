@@ -12,27 +12,24 @@ const TagList = ({ selectTag }) => {
 
   return (
     <S.ProductCheckList>
-      <h3>태그</h3>
-      <S.CheckList>
-        <S.CheckBoxList>
-          {TAG_ID.map(({ tag_id, name }) => {
-            return (
-              <S.CheckBoxs key={tag_id}>
-                <S.CheckBox
-                  type="checkbox"
-                  id={tag_id}
-                  onClick={() => selectTag(checkedList)}
-                  onChange={e => {
-                    onCheckedElement(e);
-                  }}
-                  checked={checkedList.includes(String(tag_id)) ? true : false}
-                />
-                <S.TagesTitle>{name}</S.TagesTitle>
-              </S.CheckBoxs>
-            );
-          })}
-        </S.CheckBoxList>
-      </S.CheckList>
+      <S.CheckBoxList>
+        {TAG_ID.map(({ tag_id, name }) => {
+          return (
+            <S.CheckBoxs key={tag_id}>
+              <S.CheckBox
+                type="checkbox"
+                id={tag_id}
+                onClick={() => selectTag(checkedList)}
+                onChange={e => {
+                  onCheckedElement(e);
+                }}
+                checked={checkedList.includes(String(tag_id))}
+              />
+              <S.TagesTitle>{name}</S.TagesTitle>
+            </S.CheckBoxs>
+          );
+        })}
+      </S.CheckBoxList>
     </S.ProductCheckList>
   );
 };
