@@ -94,18 +94,29 @@ export const UploadArea = styled.div`
 `;
 
 export const UploadPicture = styled.div`
-  ${({ theme }) => theme.variables.flex()}
+  ${({ theme }) => theme.variables.flex('')}
   width: 340px;
   height: 540px;
   padding: 10px;
   background-color: ${({ theme: { style } }) => style.inputColor};
 `;
 
-export const Border = styled.div`
+export const InputPicture = styled.input`
+  display: none;
+`;
+
+export const PicturePreview = styled.img`
+  width: 100%;
+  height: 100%;
+`;
+
+export const Border = styled.label`
   ${({ theme: { variables } }) => variables.flex('column')}
+  display: ${({ isFileImage }) => (isFileImage ? 'none' : 'flex')};
   width: 100%;
   height: 100%;
   border: 3px dashed #e0e0e0;
+  cursor: pointer;
 `;
 
 export const SpanText = styled.span`
@@ -117,7 +128,7 @@ export const SpanText = styled.span`
 
 export const UploadContent = styled.div`
   ${({ theme: { variables } }) => variables.flex('column', 'space-around')}
-  height: 500px;
+  height: 550px;
   margin-left: 50px;
 `;
 
@@ -135,7 +146,7 @@ export const UploadUserProfile = styled.div`
 `;
 
 export const UploadUserName = styled.span`
-  margin-left: 10px;
+  margin: 0 10px;
   font-size: 15px;
 `;
 
@@ -171,8 +182,8 @@ export const ModalModel = styled.div`
   position: absolute;
   width: 150px;
   padding: 10px;
-  top: 90px;
-  left: -20px;
+  top: 85px;
+  left: 20px;
   background-color: white;
   box-shadow: 0 0 8px rgb(0 0 0 / 10%);
   border-radius: 20px;
@@ -196,8 +207,8 @@ export const BoardBox = styled.div`
   ${({ theme: { variables } }) => variables.flex('column')}
   position: absolute;
   width: 180px;
-  top: 100px;
-  right: 50px;
+  top: 85px;
+  right: 20px;
   padding: 10px;
   background-color: white;
   box-shadow: 0 0 8px rgb(0 0 0 / 10%);
@@ -226,4 +237,16 @@ export const BoardText = styled.div`
 export const BoardLine = styled.div`
   border: 0.5px solid;
   width: 100%;
+`;
+
+export const CreateBoardTitle = styled.h3`
+  font-size: 20px;
+`;
+
+export const BoardCreateName = styled.input`
+  width: 80%;
+  padding: 10px;
+  border-radius: 20px;
+  border: none;
+  margin-top: 30px;
 `;

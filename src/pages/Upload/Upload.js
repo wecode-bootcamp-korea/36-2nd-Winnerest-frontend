@@ -1,42 +1,29 @@
-import React, { useState } from 'react';
-import * as S from './UploadStyle';
+import React from 'react';
 import UploadBoxs from './UploadBox/UploadBoxs';
+import styled from 'styled-components';
 
 const Upload = () => {
-  const [addUploadBox, setAddUploadBox] = useState([0]);
-  const [addPreviewPictureview, setAddPreviewPictureview] = useState([0]);
-
-  const onAddDetailDiv = () => {
-    let countArr = [...addUploadBox];
-    let countArrPreview = [...addPreviewPictureview];
-    let counter = countArr.slice(-1)[0];
-    counter += 1;
-    countArr.push(counter);
-    countArrPreview.push(counter);
-    setAddPreviewPictureview(countArrPreview);
-    setAddUploadBox(countArr);
-  };
-
   return (
-    <>
-      <S.PreviewPictureBox>
-        <S.AddBtn onClick={onAddDetailDiv}>+</S.AddBtn>
-        <S.Line />
-        {addPreviewPictureview.map(i => (
-          <S.PreviewPicture key={i}>
-            <S.PreviewPictureview src="/image/image.png" alt="preview" />
-          </S.PreviewPicture>
-        ))}
-      </S.PreviewPictureBox>
-      <S.UploadBackGround>
-        <S.BackgroundDiv>
-          {addUploadBox.map(i => (
-            <UploadBoxs key={i} />
-          ))}
-        </S.BackgroundDiv>
-      </S.UploadBackGround>
-    </>
+    <UploadBackGround>
+      <BackgroundDiv>
+        <UploadBoxs />
+      </BackgroundDiv>
+    </UploadBackGround>
   );
 };
+
+const UploadBackGround = styled.div`
+  ${({ theme: { variables } }) => variables.absoluteCenter}
+  width: 100%;
+  height: 100%;
+  background-color: ${({ theme: { style } }) => style.backColor};
+`;
+
+const BackgroundDiv = styled.div`
+  ${({ theme: { variables } }) => variables.flex('column')}
+  position: relative;
+  top: 150px; /* TODO : nav바 합치고 Top 수치 조정예정*/
+  background-color: ${({ theme: { style } }) => style.backColor};
+`;
 
 export default Upload;
