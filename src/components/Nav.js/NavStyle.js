@@ -10,8 +10,8 @@ export const HeaderContent = styled.header`
   padding: 0 16px;
   width: 100vw;
   height: 80px;
-  z-index: 1000;
   background-color: #ffffff;
+  z-index: 1000;
 `;
 
 export const BasicSize = styled.div`

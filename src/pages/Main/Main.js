@@ -9,7 +9,7 @@ const Main = () => {
   const navigate = useNavigate();
   const token =
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImlhdCI6MTY2MjEyMjE2MX0.j5a-YigS0uywWrn6mEs34Fqy9hWTTFIFcr2Js_PP1FE';
-  // const token = localStorage.getItem('token'); // 로그인이 안 되면 접근이 불가한 메인페이지므로 merge 전에 들어갈 수 있게끔 토큰 넣어놓았습니다
+
   const [items, setItems] = useState([]);
   const [page, setPage] = useState(0);
   const [loading, setLoading] = useState(false);

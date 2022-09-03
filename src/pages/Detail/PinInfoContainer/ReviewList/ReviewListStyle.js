@@ -71,7 +71,8 @@ export const ReviewAuthorImg = styled.img.attrs({
   border-radius: 50%;
 `;
 
-export const ReviewContent = styled.p`
+export const ReviewContent = styled.div`
+  width: 100%;
   margin-left: 8px;
 `;
 
@@ -87,8 +88,8 @@ export const ReviewAuthorTalk = styled.span`
 
 export const ReviewMoreFunction = styled.div`
   ${({ theme }) => theme.variables.flex('', 'space-between', 'center')};
-  margin-top: 4px;
   width: 50%;
+  margin-top: 4px;
   font-size: 14px;
   color: #767676;
 `;

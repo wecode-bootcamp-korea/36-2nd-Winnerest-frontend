@@ -19,6 +19,7 @@ export const HoverWrap = styled.div`
 `;
 
 export const PinInfoContainer = styled.div`
+  width: 50%;
   padding: 16px 32px 0 32px;
 `;
 
@@ -46,19 +47,28 @@ export const EllipsisBtn = styled(Ellipsis)`
 export const EllipsisContent = styled.ul`
   position: absolute;
   display: ${({ isActive }) => (isActive ? 'block' : 'none')};
-  width: 100%;
+  width: 180px;
   padding: 10px;
   top: 100%;
-  left: -40%;
+  left: -50%;
   background-color: #ffffff;
   border-radius: 20px;
   z-index: 100;
+`;
+
+export const downloadBtn = styled.a`
+  width: 200px;
+  text-decoration: none;
+  color: #000000;
+  cursor: pointer;
 `;
 
 export const EllipsisItem = styled.li`
   width: 100%;
   padding: 12px 18px;
   font-weight: 700;
+  cursor: pointer;
+
   &:hover {
     background-color: rgb(225, 225, 225);
     border-radius: 8px;
@@ -122,4 +132,17 @@ export const FollowerBtn = styled.button`
   &:hover {
     background-color: rgb(225, 225, 225);
   }
+`;
+
+export const setPinInput = styled.textarea`
+  width: 80%;
+  height: ${({ isSelectInput }) => (isSelectInput ? 'auto' : '32px')};
+  margin: 4px auto;
+  padding: 4px;
+  font-size: 16px;
+  border: 1px solid rgb(205, 205, 205);
+  border-radius: 8px;
+  outline: none;
+  resize: none;
+  overflow: hidden;
 `;

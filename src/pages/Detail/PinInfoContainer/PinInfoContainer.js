@@ -1,19 +1,130 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
+import axios from 'axios';
+
 import * as S from './PinInfoStyle';
 
 import Button from '../../../components/Button/Button';
 import ReviewList from './ReviewList/ReviewList';
 import CloseEllipsisContent from './CloseEllipsisContent';
+import Modal from '../../../components/Modal/Modal';
 
-const PinInfoContainer = () => {
+const PinInfoContainer = ({
+  title,
+  contents,
+  nickname,
+  follower,
+  imgUrl,
+  reviewCount,
+  params,
+  userId,
+  followBtn,
+  setFollowBtn,
+  getPinData,
+}) => {
   const [isActive, setIsActive] = useState(false);
+  const [isModal, setIsModal] = useState(false);
+  const [changeInfo, setChangeInfo] = useState({
+    title: '',
+    desc: '',
+  });
+  const [savedBtn, setSavedBtn] = useState(false);
 
-  //* 클립 보드 복사
-  //* const copyUrl = window.location.href;
+  const textRef = useRef(null);
+
+  const clipCopyUrl = url => {
+    if (navigator.clipboard) {
+      navigator.clipboard
+        .writeText(url)
+        .then(() => {
+          alert('클립보드에 복사되었습니다.');
+        })
+        .catch(() => {
+          alert('복사를 다시 시도해주세요.');
+        });
+    } else {
+      alert('지원되지 않는 브라우저입니다.');
+    }
+  };
 
   const onSetIsActive = active => {
     setIsActive(active);
   };
+
+  const handleResizeHeight = defaultHeight => {
+    textRef.current.style.height = defaultHeight;
+    textRef.current.style.height = textRef.current.scrollHeight + 'px';
+  };
+
+  const handleChangeInfo = ({ target }) => {
+    handleResizeHeight('48px');
+    setChangeInfo({
+      ...changeInfo,
+      [target.name]: target.value,
+    });
+  };
+
+  const saveChangeInfo = async () => {
+    try {
+      await axios.patch(
+        `http://10.58.2.200:3000/pins/${params.id}`,
+        {
+          boardId: '1',
+          title: changeInfo.title,
+          contents: changeInfo.desc,
+        },
+        {
+          headers: {
+            Authorization:
+              'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImV4cCI6MTY2MjY3MzQ5NSwiaWF0IjoxNjYyMzEzNDk1fQ.9NOQvYex5iImwlj02CZSYLrHYf-oGCU4cH1k0RR4pF8',
+          },
+        }
+      );
+    } catch (err) {
+      throw new Error(err);
+    }
+  };
+
+  const postFollowBtn = async () => {
+    axios.post(
+      `http://10.58.7.159:3000/auth/follow/${userId}`,
+      {},
+      {
+        headers: {
+          Authorization:
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImlhdCI6MTY2MjEyMjE2MX0.j5a-YigS0uywWrn6mEs34Fqy9hWTTFIFcr2Js_PP1FE',
+        },
+      }
+    );
+  };
+
+  const deleteFollowBtn = async () => {
+    axios.delete(`http://10.58.7.159:3000/auth/follow/${userId}`, {
+      headers: {
+        Authorization:
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImlhdCI6MTY2MjEyMjE2MX0.j5a-YigS0uywWrn6mEs34Fqy9hWTTFIFcr2Js_PP1FE',
+      },
+    });
+  };
+
+  const setPinInfo = (
+    <>
+      <S.setPinInput
+        onChange={e => handleChangeInfo(e)}
+        type="text"
+        placeholder="제목"
+        name="title"
+      />
+      <S.setPinInput
+        ref={textRef}
+        onChange={e => handleChangeInfo(e)}
+        isSelectInput={changeInfo}
+        type="text"
+        placeholder="내용"
+        name="desc"
+      />
+    </>
+  );
+
   return (
     <>
       <S.PinInfoContainer>
@@ -27,44 +138,75 @@ const PinInfoContainer = () => {
               <S.EllipsisBtn />
             </S.HoverWrap>
             <S.EllipsisContent isActive={isActive}>
-              <S.EllipsisItem>이미지 다운로드</S.EllipsisItem>
-              <S.EllipsisItem>링크 복사</S.EllipsisItem>
+              <S.downloadBtn href={imgUrl} download target="_blank">
+                <S.EllipsisItem>이미지 다운로드</S.EllipsisItem>
+              </S.downloadBtn>
+              <S.EllipsisItem onClick={() => clipCopyUrl(window.location.href)}>
+                링크 복사
+              </S.EllipsisItem>
+              <S.EllipsisItem onClick={() => setIsModal(isModal => !isModal)}>
+                수정
+              </S.EllipsisItem>
+              {isModal && (
+                <Modal
+                  childeren={setPinInfo}
+                  onClose={() => setIsModal(isModal => !isModal)}
+                  isCancel="true"
+                  propsFunction={saveChangeInfo}
+                />
+              )}
             </S.EllipsisContent>
           </S.LeftContent>
           <Button
-            children="저장"
+            children={!savedBtn ? '저장' : '저장됨'}
             size="large"
             width="60px"
+            color={savedBtn ? 'black' : ''}
+            hoverColor={savedBtn ? 'hoverGrey' : ''}
+            onClick={() => setSavedBtn(savedBtn => !savedBtn)}
             style={{
               height: '48px',
               fontSize: '16px',
-              color: '#ffffff',
               zIndex: '100',
             }}
           />
         </S.StickyContent>
-        <S.PinTitle>
-          I am a girl who loves life an5D DIY Diamond Embroidery Mounta
-        </S.PinTitle>
-        <S.PinDesc>
-          I am a girl who loves life an5D DIY Diamond Embroidery Mounta I am a
-          girl who loves life an5D DIY Diamond Embroidery Mounta I am a girl who
-          loves life an5D DIY Diamond Embroidery Mounta I am a girl who loves
-          life an5D DIY Diamond Embroidery Mounta
-        </S.PinDesc>
+        <S.PinTitle>{title}</S.PinTitle>
+        <S.PinDesc>{contents}</S.PinDesc>
         <S.AuthorProfile>
           <S.AuthorProfileLink to="/">
             <S.AuthorImg />
           </S.AuthorProfileLink>
           <S.AuthorInfoWrapper>
             <S.AuthorInfo>
-              <S.AuthorProfileLink to="/">Pulan</S.AuthorProfileLink>
-              <S.AuthorFollower>팔로워 281명</S.AuthorFollower>
+              <S.AuthorProfileLink to="/">{nickname}</S.AuthorProfileLink>
+              <S.AuthorFollower>팔로워 {follower}명</S.AuthorFollower>
             </S.AuthorInfo>
-            <S.FollowerBtn>팔로우</S.FollowerBtn>
+            {followBtn ? (
+              <S.FollowerBtn
+                onClick={async () => {
+                  await setFollowBtn(followBtn => !followBtn);
+                  await deleteFollowBtn();
+                  await getPinData();
+                }}
+                style={{ backgroundColor: 'black', color: 'white' }}
+              >
+                팔로잉
+              </S.FollowerBtn>
+            ) : (
+              <S.FollowerBtn
+                onClick={async () => {
+                  await setFollowBtn(followBtn => !followBtn);
+                  await postFollowBtn();
+                  await getPinData();
+                }}
+              >
+                팔로우
+              </S.FollowerBtn>
+            )}
           </S.AuthorInfoWrapper>
         </S.AuthorProfile>
-        <ReviewList />
+        <ReviewList reviewCount={reviewCount} />
       </S.PinInfoContainer>
       <CloseEllipsisContent isActive={isActive} onSetIsActive={onSetIsActive} />
     </>
