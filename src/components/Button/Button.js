@@ -8,14 +8,12 @@ const sizeStyles = css`
       height: 50px;
       font-size: 20px;
     `}
-
   ${props =>
     props.size === 'medium' &&
     css`
       height: 35px;
       font-size: 15px;
     `}
-
     ${props =>
     props.size === 'small' &&
     css`
@@ -40,17 +38,13 @@ const StyledButton = styled.button`
   color: ${({ theme }) => theme.style.white};
   font-weight: bold;
   cursor: pointer;
-
   background-color: #e60023;
-
   &:hover {
     background-color: #eb3450;
   }
-
   &:active {
     background-color: #e60023;
   }
-
   ${({ theme, color, hoverColor }) => {
     const selected = theme.style[color];
     const hover = theme.style[hoverColor];
