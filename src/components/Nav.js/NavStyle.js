@@ -4,14 +4,14 @@ import { ReactComponent as Search } from '../../assets/Icon-Search.svg';
 import { ReactComponent as Arrow } from '../../assets/Icon-arrow.svg';
 
 export const HeaderContent = styled.header`
-  position: fixed;
   top: 0;
+  position: fixed;
   ${({ theme }) => theme.variables.flex('', 'space-between', 'center')}
   padding: 0 16px;
   width: 100vw;
   height: 80px;
-  background-color: #ffffff;
   z-index: 1000;
+  background-color: #ffffff;
 `;
 
 export const BasicSize = styled.div`
