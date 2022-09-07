@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from 'react';
 import * as S from '../ReviewListStyle';
 
 const ReviewItem = ({
@@ -9,6 +10,8 @@ const ReviewItem = ({
   postReviewLike,
   getReviewData,
 }) => {
+  const [user, setUser] = useState(false);
+
   const elapsedTime = date => {
     const start = new Date(date);
     const end = new Date();
@@ -33,12 +36,25 @@ const ReviewItem = ({
     return '방금 전';
   };
 
+  const token = localStorage.getItem('Token');
+
+  useEffect(() => {
+    fetch(`http://10.58.7.159:3000/auth`, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: token,
+      },
+    })
+      .then(res => res.json())
+      .then(data => setUser(data.data));
+  }, [token]);
+
   return (
     <S.ReviewSize>
       <S.ReviewItem>
-        <S.ReviewAuthorImg src="" alt="" />
+        <S.ReviewAuthorImg src={user.profileUrl} alt="" />
         <S.ReviewContent>
-          <S.ReviewAuthorName>{nickname}</S.ReviewAuthorName>
+          <S.ReviewAuthorName>{user.nickname}</S.ReviewAuthorName>
           <S.ReviewAuthorTalk>{contents}</S.ReviewAuthorTalk>
           <S.ReviewMoreFunction>
             <S.CreateReviewDate>{elapsedTime(created_at)}</S.CreateReviewDate>

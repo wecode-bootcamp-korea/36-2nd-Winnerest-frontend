@@ -62,10 +62,7 @@ export const ReviewItem = styled.div`
   margin-bottom: 12px;
 `;
 
-export const ReviewAuthorImg = styled.img.attrs({
-  src: 'https://i.pinimg.com/75x75_RS/78/f3/ae/78f3aeae6f7f23bf464950eccbee8301.jpg',
-  alt: '로고 이미지',
-})`
+export const ReviewAuthorImg = styled.img`
   width: 32px;
   height: 32px;
   border-radius: 50%;
@@ -117,10 +114,7 @@ export const WriteReviewContent = styled.div`
   margin-top: 48px;
 `;
 
-export const AuthorImg = styled.img.attrs({
-  src: 'https://i.pinimg.com/75x75_RS/78/f3/ae/78f3aeae6f7f23bf464950eccbee8301.jpg',
-  alt: '로고 이미지',
-})`
+export const AuthorImg = styled.img`
   width: 48px;
   height: 48px;
   border-radius: 50%;

@@ -1,8 +1,6 @@
 import { useState, useRef } from 'react';
 import axios from 'axios';
-
 import * as S from './PinInfoStyle';
-
 import Button from '../../../components/Button/Button';
 import ReviewList from './ReviewList/ReviewList';
 import CloseEllipsisContent from './CloseEllipsisContent';
@@ -20,17 +18,19 @@ const PinInfoContainer = ({
   followBtn,
   setFollowBtn,
   getPinData,
+  profileUrl,
 }) => {
   const [isActive, setIsActive] = useState(false);
   const [isModal, setIsModal] = useState(false);
+
+  const token = localStorage.getItem('Token');
+
   const [changeInfo, setChangeInfo] = useState({
     title: '',
     desc: '',
   });
   const [savedBtn, setSavedBtn] = useState(false);
-
   const textRef = useRef(null);
-
   const clipCopyUrl = url => {
     if (navigator.clipboard) {
       navigator.clipboard
@@ -66,7 +66,7 @@ const PinInfoContainer = ({
   const saveChangeInfo = async () => {
     try {
       await axios.patch(
-        `http://10.58.2.200:3000/pins/${params.id}`,
+        `http://10.58.7.159:3000/pins/${params.id}`,
         {
           boardId: '1',
           title: changeInfo.title,
@@ -74,12 +74,12 @@ const PinInfoContainer = ({
         },
         {
           headers: {
-            Authorization:
-              'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImV4cCI6MTY2MjY3MzQ5NSwiaWF0IjoxNjYyMzEzNDk1fQ.9NOQvYex5iImwlj02CZSYLrHYf-oGCU4cH1k0RR4pF8',
+            Authorization: token,
           },
         }
       );
     } catch (err) {
+      alert('당신이 만든 핀이 아닙니다.');
       throw new Error(err);
     }
   };
@@ -90,8 +90,7 @@ const PinInfoContainer = ({
       {},
       {
         headers: {
-          Authorization:
-            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImlhdCI6MTY2MjEyMjE2MX0.j5a-YigS0uywWrn6mEs34Fqy9hWTTFIFcr2Js_PP1FE',
+          Authorization: token,
         },
       }
     );
@@ -100,8 +99,7 @@ const PinInfoContainer = ({
   const deleteFollowBtn = async () => {
     axios.delete(`http://10.58.7.159:3000/auth/follow/${userId}`, {
       headers: {
-        Authorization:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImlhdCI6MTY2MjEyMjE2MX0.j5a-YigS0uywWrn6mEs34Fqy9hWTTFIFcr2Js_PP1FE',
+        Authorization: token,
       },
     });
   };
@@ -175,7 +173,7 @@ const PinInfoContainer = ({
         <S.PinDesc>{contents}</S.PinDesc>
         <S.AuthorProfile>
           <S.AuthorProfileLink to="/">
-            <S.AuthorImg />
+            <S.AuthorImg src={profileUrl} />
           </S.AuthorProfileLink>
           <S.AuthorInfoWrapper>
             <S.AuthorInfo>
@@ -212,5 +210,4 @@ const PinInfoContainer = ({
     </>
   );
 };
-
 export default PinInfoContainer;

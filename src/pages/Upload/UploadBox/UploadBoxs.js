@@ -230,7 +230,7 @@ const UploadBoxs = () => {
                 <S.UploadUserProfile
                   src={
                     userInfo.profileUrl === null
-                      ? '/image/image.png'
+                      ? '/image/user.png'
                       : userInfo.profileUrl
                   }
                 />
