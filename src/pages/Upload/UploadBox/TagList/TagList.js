@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import * as S from './TagListStyle';
 
-const TagList = ({ selectTag }) => {
+const TagList = ({ setTags }) => {
   const [checkedList, setCheckedList] = useState([]);
 
   const onCheckedElement = e => {
@@ -19,7 +19,7 @@ const TagList = ({ selectTag }) => {
               <S.CheckBox
                 type="checkbox"
                 id={tag_id}
-                onClick={() => selectTag(checkedList)}
+                onClick={setTags(checkedList)}
                 onChange={e => {
                   onCheckedElement(e);
                 }}
