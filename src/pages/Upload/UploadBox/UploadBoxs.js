@@ -4,21 +4,47 @@ import TagList from './TagList/TagList';
 import Button from '../../../components/Button/Button';
 import Modal from '../../../components/Modal/Modal';
 import { textResize, toggleModal } from '../../../util';
-import axios from 'axios';
+import {
+  uploadImage,
+  getUser,
+  getBoards,
+  createBoard,
+} from '../../../uploadConfig';
 
-const UploadBoxs = ({ addUploadBox }) => {
+const UploadBoxs = () => {
+  //Modal
   const [isDelete, setIsDelete] = useState(false);
   const [isBoard, setIsBoard] = useState(false);
   const [isTag, setIsTag] = useState(false);
   const [isModal, setIsModal] = useState(false);
+
+  //PostContent
   const [boardTitle, setBoardTitle] = useState('');
-  const [tags, setTags] = useState([]);
   const [fileImage, setFileImage] = useState('');
   const [createBoardName, setcreateBoardName] = useState('');
+  const [tags, setTags] = useState([]);
+
   const [pinContent, setPinContent] = useState({
     title: '',
     content: '',
   });
+
+  //getUser
+  const [userInfo, setUserInfo] = useState('');
+  const [getBoard, setGetBoard] = useState('');
+  const [boardId, setBoardId] = useState('');
+
+  //errCatch
+  const [errMessage, setErrMessage] = useState('');
+  const [catchErr, setCatchErr] = useState(false);
+
+  useEffect(() => {
+    getUser(setUserInfo);
+  }, []);
+
+  useEffect(() => {
+    getBoards(setGetBoard);
+  }, []);
 
   const setPinInput = e => {
     const { name, value } = e.target;
@@ -29,42 +55,26 @@ const UploadBoxs = ({ addUploadBox }) => {
     setFileImage(URL.createObjectURL(e.target.files[0]));
   };
 
-  const uploadImage = file => {
-    const url = ``;
-
-    const form = new FormData();
-    form.append('file', file);
-
-    const config = {
-      headers: {
-        'content-type': 'multipart/form-data',
-      },
-    };
-
-    return axios.post(url, form, config).then(res => res.data);
-  };
-
-  const updateImage = async () => {
+  const updateImage = async (
+    tags,
+    setCatchErr,
+    pinContent,
+    setIsModal,
+    setErrMessage,
+    boardId,
+    fileImage
+  ) => {
     const file = document.getElementById('imageFile').files[0];
-    return await uploadImage(file);
-  };
-
-  const handleSubmit = async fileUrl => {
-    axios
-      .post('/post', {
-        title: pinContent.title,
-        content: pinContent.content,
-        tag: tags,
-        img: fileUrl,
-      })
-      .then(res => {})
-      .catch(err => {
-        throw err;
-      });
-  };
-
-  const selectTag = tags => {
-    setTags(tags);
+    return await uploadImage(
+      file,
+      tags,
+      setCatchErr,
+      pinContent,
+      setIsModal,
+      setErrMessage,
+      boardId,
+      fileImage
+    );
   };
 
   /* modal */
@@ -106,17 +116,6 @@ const UploadBoxs = ({ addUploadBox }) => {
     </>
   );
 
-  const createBoard = () => {
-    axios
-      .post('url', {
-        title: createBoardName,
-      })
-      .then(res => {})
-      .catch(err => {
-        throw err;
-      });
-  };
-
   return (
     <S.UploadBoxDiv>
       <S.UploadBox>
@@ -135,12 +134,22 @@ const UploadBoxs = ({ addUploadBox }) => {
               <S.BoardBox ref={el => (boardRef.current = el)}>
                 <S.BoardText>모든보드</S.BoardText>
 
-                {BOARD_TITLES.map(titles => (
+                {getBoard.map((titles, idx) => (
                   <S.UserBox
-                    onClick={() => selectBoardTitle(titles.title)}
-                    key={titles.id}
+                    onClick={() => {
+                      selectBoardTitle(titles.title);
+                      setBoardId(titles.id);
+                    }}
+                    key={idx}
                   >
-                    <S.ImgTag src="/image/sample.png" alt="sample" />
+                    <S.ImgTag
+                      src={
+                        titles.imgUrl === null
+                          ? '/image/image.png'
+                          : titles.imgUrl
+                      }
+                      alt="sample"
+                    />
                     <S.BoardText>{titles.title}</S.BoardText>
                   </S.UserBox>
                 ))}
@@ -155,9 +164,9 @@ const UploadBoxs = ({ addUploadBox }) => {
 
             {isModal && (
               <Modal
-                childeren={BoardSetting}
+                childeren={catchErr ? errMessage : BoardSetting}
                 onClose={() => toggleModal(setIsModal, isModal)}
-                propsFunction={createBoard}
+                propsFunction={() => createBoard(createBoardName, setGetBoard)}
               />
             )}
 
@@ -168,10 +177,17 @@ const UploadBoxs = ({ addUploadBox }) => {
               </S.BoardNameBox>
               {!isBoard && (
                 <S.SaveBtn
-                  onClick={async () => {
-                    const url = await updateImage();
-                    await handleSubmit(url);
-                  }}
+                  onClick={async () =>
+                    await updateImage(
+                      tags,
+                      setCatchErr,
+                      pinContent,
+                      setIsModal,
+                      setErrMessage,
+                      boardId,
+                      fileImage
+                    )
+                  }
                 >
                   저장
                 </S.SaveBtn>
@@ -211,8 +227,14 @@ const UploadBoxs = ({ addUploadBox }) => {
 
             <S.UploadContent>
               <S.UploadUserBox>
-                <S.UploadUserProfile>가</S.UploadUserProfile>
-                <S.UploadUserName>가나다</S.UploadUserName>
+                <S.UploadUserProfile
+                  src={
+                    userInfo.profileUrl === null
+                      ? '/image/image.png'
+                      : userInfo.profileUrl
+                  }
+                />
+                <S.UploadUserName>{userInfo.nickname}</S.UploadUserName>
 
                 <Button
                   size="medium"
@@ -225,7 +247,7 @@ const UploadBoxs = ({ addUploadBox }) => {
                 </Button>
               </S.UploadUserBox>
 
-              {isTag && <TagList selectTag={tags => selectTag(tags)} />}
+              {isTag && <TagList setTags={setTags} />}
               <S.InputArea>
                 <S.UploadInput
                   name="title"
@@ -257,18 +279,3 @@ const UploadBoxs = ({ addUploadBox }) => {
 };
 
 export default UploadBoxs;
-
-const BOARD_TITLES = [
-  {
-    id: 1,
-    title: 'test1',
-  },
-  {
-    id: 2,
-    title: 'test2',
-  },
-  {
-    id: 3,
-    title: 'test3',
-  },
-];

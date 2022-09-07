@@ -137,7 +137,7 @@ export const UploadUserBox = styled.div`
   padding: 10px;
 `;
 
-export const UploadUserProfile = styled.div`
+export const UploadUserProfile = styled.img`
   ${({ theme: { variables } }) => variables.flex()}
   width: 30px;
   height: 30px;
