@@ -40,15 +40,13 @@ export const LogoWrapper = styled.h1`
   ${({ theme }) => theme.variables.flex('', 'center', 'center')}
   width: 48px;
   height: 48px;
+  margin: 15px;
   cursor: pointer;
 `;
 
-export const Logo = styled.img.attrs({
-  src: 'https://i.pinimg.com/75x75_RS/78/f3/ae/78f3aeae6f7f23bf464950eccbee8301.jpg',
-  alt: '로고 이미지',
-})`
-  width: 24px;
-  height: 24px;
+export const Logo = styled.img`
+  width: 35px;
+  height: 35px;
   border-radius: 50%;
 `;
 
@@ -132,10 +130,7 @@ export const LogOutBtn = styled(BasicSize)`
   }
 `;
 
-export const UserProfile = styled.img.attrs({
-  src: 'https://i.pinimg.com/75x75_RS/78/f3/ae/78f3aeae6f7f23bf464950eccbee8301.jpg',
-  alt: '유저 프로필',
-})`
+export const UserProfile = styled.img`
   width: 24px;
   height: 24px;
   margin: 0 16px 0 20px;

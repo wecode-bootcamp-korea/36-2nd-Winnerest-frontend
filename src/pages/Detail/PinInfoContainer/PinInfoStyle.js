@@ -99,10 +99,7 @@ export const AuthorProfileLink = styled(Link)`
   font-weight: 600;
 `;
 
-export const AuthorImg = styled.img.attrs({
-  src: 'https://i.pinimg.com/75x75_RS/78/f3/ae/78f3aeae6f7f23bf464950eccbee8301.jpg',
-  alt: '로고 이미지',
-})`
+export const AuthorImg = styled.img`
   width: 48px;
   height: 48px;
   border-radius: 50%;

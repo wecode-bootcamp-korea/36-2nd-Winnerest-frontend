@@ -39,7 +39,7 @@ const Main = () => {
     } else {
       getItems();
     }
-  }, [page]);
+  }, []);
 
   useEffect(() => {
     if (inView && !loading) {
@@ -69,7 +69,7 @@ const Main = () => {
 const MainLayout = styled.div`
   width: 100%;
   height: auto;
-  margin-top: 250px;
+  margin-top: 100px;
 `;
 
 const MainStyle = styled.div`

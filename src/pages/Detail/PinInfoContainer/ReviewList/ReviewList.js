@@ -1,7 +1,6 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-
 import * as S from './ReviewListStyle';
 import ReviewItem from './ReviewItem/ReviewItem';
 
@@ -13,18 +12,30 @@ const ReviewList = ({ reviewCount }) => {
     reviewValue: '',
   });
   const [getReviews, setGetReviews] = useState([]);
-
   const params = useParams();
   const textRef = useRef(null);
+  const [user, setUser] = useState(false);
+
+  const token = localStorage.getItem('Token');
+
+  useEffect(() => {
+    fetch(`http://10.58.7.159:3000/auth`, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: token,
+      },
+    })
+      .then(res => res.json())
+      .then(data => setUser(data.data));
+  }, [token]);
 
   const getReviewData = async () => {
     try {
       const res = await axios.get(
-        `http://10.58.2.200:3000/reviews/pin/${params.id}`,
+        `http://10.58.7.159:3000/reviews/pin/${params.id}`,
         {
           headers: {
-            Authorization:
-              'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImV4cCI6MTY2MjY3MzQ5NSwiaWF0IjoxNjYyMzEzNDk1fQ.9NOQvYex5iImwlj02CZSYLrHYf-oGCU4cH1k0RR4pF8',
+            Authorization: token,
           },
         }
       );
@@ -34,18 +45,16 @@ const ReviewList = ({ reviewCount }) => {
       throw new Error(err);
     }
   };
-
   const postReviewData = async () => {
     try {
       await axios.post(
-        `http://10.58.2.200:3000/reviews/${params.id}`,
+        `http://10.58.7.159:3000/reviews/${params.id}`,
         {
           contents: isStateObj.reviewValue,
         },
         {
           headers: {
-            Authorization:
-              'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImV4cCI6MTY2MjY3MzQ5NSwiaWF0IjoxNjYyMzEzNDk1fQ.9NOQvYex5iImwlj02CZSYLrHYf-oGCU4cH1k0RR4pF8',
+            Authorization: token,
           },
         }
       );
@@ -53,18 +62,16 @@ const ReviewList = ({ reviewCount }) => {
       throw new Error(err);
     }
   };
-
   const postReviewLike = async id => {
     try {
       await axios.post(
-        `http://10.58.2.200:3000/reviews/${id}/like`,
+        `http://10.58.7.159:3000/reviews/${id}/like`,
         {
           reviewId: id,
         },
         {
           headers: {
-            Authorization:
-              'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImV4cCI6MTY2MjY3MzQ5NSwiaWF0IjoxNjYyMzEzNDk1fQ.9NOQvYex5iImwlj02CZSYLrHYf-oGCU4cH1k0RR4pF8',
+            Authorization: token,
           },
         }
       );
@@ -72,24 +79,20 @@ const ReviewList = ({ reviewCount }) => {
       throw new Error(err);
     }
   };
-
   const handleReviewMoreBtn = () => {
     setIsStateObj({
       ...isStateObj,
       isReviewMore: !isStateObj.isReviewMore,
       isGetReviewData: false,
     });
-
     if (isStateObj.isGetReviewData) {
       getReviewData();
     }
   };
-
   const handleResizeHeight = defaultHeight => {
     textRef.current.style.height = defaultHeight;
     textRef.current.style.height = textRef.current.scrollHeight + 'px';
   };
-
   const reviewInputChange = e => {
     handleResizeHeight('40px');
     e.target.value.length <= 1 &&
@@ -98,7 +101,6 @@ const ReviewList = ({ reviewCount }) => {
         reviewValue: textRef.current.value,
       });
   };
-
   const closeReviewInput = () => {
     setIsStateObj({
       ...isStateObj,
@@ -108,7 +110,6 @@ const ReviewList = ({ reviewCount }) => {
     handleResizeHeight('20px');
     textRef.current.value = '';
   };
-
   return (
     <>
       <S.ReviewCounter>
@@ -137,7 +138,7 @@ const ReviewList = ({ reviewCount }) => {
               />
             ))}
             <S.WriteReviewContent>
-              <S.AuthorImg />
+              <S.AuthorImg src={user.profileUrl} />
               <S.WriteReviewInputBox>
                 <S.WriteReviewInput
                   ref={textRef}
@@ -195,5 +196,4 @@ const ReviewList = ({ reviewCount }) => {
     </>
   );
 };
-
 export default ReviewList;

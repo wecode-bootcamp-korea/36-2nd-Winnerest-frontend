@@ -10,6 +10,8 @@ const PinImgWrapper = ({ tagId }) => {
   });
   const [isData, setIsData] = useState(true);
 
+  const token = localStorage.getItem('Token');
+
   const debounce = (func, delay) => {
     let timer = null;
 
@@ -26,8 +28,7 @@ const PinImgWrapper = ({ tagId }) => {
           `http://10.58.7.159:3000/pins/recommend/${tagId}?pageSize=10&page=${pinWrapper.prevItems}`,
           {
             headers: {
-              Authorization:
-                'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImlhdCI6MTY2MjEyMjE2MX0.j5a-YigS0uywWrn6mEs34Fqy9hWTTFIFcr2Js_PP1FE',
+              Authorization: token,
             },
           }
         );

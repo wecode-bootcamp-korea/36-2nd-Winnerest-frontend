@@ -13,7 +13,7 @@ const Board = ({ boardPin, setBoardId, setVisible, visible, onClickBoard }) => {
       }}
     >
       <S.BoardBoarder>
-        <S.Img src="https://png.pngtree.com/png-vector/20190215/ourmid/pngtree-vector-folder-icon-png-image_529920.jpg" />
+        <S.Img src="https://cdn-icons-png.flaticon.com/512/3503/3503713.png" />
       </S.BoardBoarder>
       <S.BoardName>{boardTitle}</S.BoardName>
       {/* <S.CountOfBoard> 핀 갯수 {pinCount} </S.CountOfBoard> */}

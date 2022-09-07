@@ -150,8 +150,8 @@ export const Board = styled.div`
 `;
 
 export const BoardBoarder = styled.div`
-  width: 245px;
-  height: 155px;
+  width: 200px;
+  height: auto;
   border-radius: 10%;
   overflow: hidden;
 `;

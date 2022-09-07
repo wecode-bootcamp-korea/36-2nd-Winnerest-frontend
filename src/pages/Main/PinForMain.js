@@ -1,26 +1,25 @@
 import React, { forwardRef, useState } from 'react';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-const PinForMain = forwardRef(({ url, id }, ref) => {
+const PinForMain = forwardRef(({ url, pinId, id }, ref) => {
   const [visibleModal, setVisibleModal] = useState(false);
 
   const getPin = () => {
     setVisibleModal(!visibleModal);
   };
   return (
-    // <Link to={`/pins/${id.pinId}`}>
-    // merge 후 상세 페이지로 링크 걸어주기 위해 주석 처리했습니다
-    <PinItem id={id} ref={ref}>
-      <PinImg src={url} />
-      <DownloadStartBtn BackgroudColor="#e60023" onClick={getPin}>
-        저장
-      </DownloadStartBtn>
-      {visibleModal && (
-        <DownloadStartBtn BackgroudColor="#eb3450"> 저장됨 </DownloadStartBtn>
-      )}
-    </PinItem>
-    // </Link>
+    <Link to={`/pins/${pinId}`}>
+      <PinItem id={id} ref={ref}>
+        <PinImg src={url} />
+        <DownloadStartBtn BackgroudColor="#e60023" onClick={getPin}>
+          저장
+        </DownloadStartBtn>
+        {visibleModal && (
+          <DownloadStartBtn BackgroudColor="#eb3450"> 저장됨 </DownloadStartBtn>
+        )}
+      </PinItem>
+    </Link>
   );
 });
 

@@ -8,9 +8,9 @@ const LoginKakao = () => {
   const getKakaoAuth = () => {
     Kakao.init(process.env.REACT_APP_KAKAO_INIT_KEY);
     Kakao.Auth.login({
-      scope: 'profile_nickname, account_email',
+      scope: 'profile_nickname, account_email ,profile_image',
       success: function (authObj) {
-        fetch('http://10.58.3.130:3000/auth/kakao-login', {
+        fetch('http://10.58.7.159:3000/auth/kakao-login', {
           method: 'GET',
           headers: { authorization: authObj.access_token },
         })
@@ -19,7 +19,7 @@ const LoginKakao = () => {
             if (data.accessToken) {
               localStorage.setItem('Token', data.accessToken);
               alert('로그인 되었습니다');
-              navigate('/');
+              navigate('/pins');
             } else {
               alert('다시 시도해주세요!');
             }

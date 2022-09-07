@@ -13,8 +13,7 @@ const MyPage = () => {
   const [isModal, setIsModal] = useState(false);
   const [createBoardName, setCreateBoardName] = useState();
 
-  const token =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImlhdCI6MTY2MjEyMjE2MX0.j5a-YigS0uywWrn6mEs34Fqy9hWTTFIFcr2Js_PP1FE';
+  const token = localStorage.getItem('Token');
 
   useEffect(() => {
     fetch(`http://10.58.7.159:3000/auth`, {
@@ -25,7 +24,7 @@ const MyPage = () => {
     })
       .then(res => res.json())
       .then(data => setUser(data.data));
-  }, []);
+  }, [token]);
 
   const onClickBoard = async () => {
     await fetch(`http://10.58.7.159:3000/board/${boardId}`, {
@@ -64,7 +63,6 @@ const MyPage = () => {
       .then(response => response.json())
       .then(data => {
         if (data.message === 'CREATED_BOARD') {
-          alert('추가 되었습니다. 새로고침 하세요.');
         } else {
           alert('요청이 거부되었습니다.');
         }
