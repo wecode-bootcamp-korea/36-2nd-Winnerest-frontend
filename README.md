@@ -1,30 +1,30 @@
-# winnerest
+# 36기 2차 프로젝트 'Winnerest'
 
-# FE
 
-- 권영준
-- 김다현
-- 조은지
+ ![메인 파일](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2F9Cp4b%2FbtrLMzIWjfm%2FQfmklxGjs9MGLKSHHmx0eK%2Fimg.png)
+ 
+- 사진에 기반한 소셜 네트워크 서비스 'Pinterest'를 클론하였습니다.
+- 외부 라이브러리 사용, React CRA 툴을 사용하여 구현하였습니다.
 
-# BE
+## 개발 기간
+- 2022년 8월 16일 ~ 2022년 8월 25일 10일
 
-- 길성민
-- 백민석
+## Winnerest
+- FE : 권영준, 조은지, 김다현
+- BE : 길성민, 백민석
+
+## 사용 기술 
+- 프론트엔드 : JavaScript, React.js, Style Component
+- 백엔드 : Node.js, MySQL 8.0, Postman, Express 
+- 협업 툴 : Trello, Slack, Google Sheet
+
+## 구현 기능 
+- 권영준 : 업로드 페이지, 공통 컴포넌트 (버튼, 모달창)
+- 조은지 : 로그인 페이지, 메인 페이지, 마이 페이지
+- 김다현 : 핀 상세 페이지, 공통 Nav바
+
 
 ---
-
-
-
-![메인 파일](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2F9Cp4b%2FbtrLMzIWjfm%2FQfmklxGjs9MGLKSHHmx0eK%2Fimg.png)
-
-
-
-
-
-
-핀터레스트 클론 코딩 입니다
-
-# 구현한 기능
 
 ## 김다현
 ### 1. 핀 상세 페이지
