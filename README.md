@@ -15,7 +15,7 @@
 
 
 
-![메인 파일](https://blog.kakaocdn.net/dn/9Cp4b/btrLMzIWjfm/QfmklxGjs9MGLKSHHmx0eK/img.png)
+![메인 파일](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2F9Cp4b%2FbtrLMzIWjfm%2FQfmklxGjs9MGLKSHHmx0eK%2Fimg.png)
 
 
 
