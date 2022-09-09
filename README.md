@@ -15,7 +15,7 @@
 
 
 
-![메인 파일](/메인 캡쳐.png)
+![메인 파일](https://blog.kakaocdn.net/dn/9Cp4b/btrLMzIWjfm/QfmklxGjs9MGLKSHHmx0eK/img.png)
 
 
 
