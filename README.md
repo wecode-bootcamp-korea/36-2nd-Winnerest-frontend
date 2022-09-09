@@ -1,22 +1,28 @@
 # 36기 2차 프로젝트 'Winnerest'
 
 
+
  ![메인 파일](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2F9Cp4b%2FbtrLMzIWjfm%2FQfmklxGjs9MGLKSHHmx0eK%2Fimg.png)
+ 
  
 - 사진에 기반한 소셜 네트워크 서비스 'Pinterest'를 클론하였습니다.
 - 외부 라이브러리 사용, React CRA 툴을 사용하여 구현하였습니다.
 
+
 ## 개발 기간
-- 2022년 8월 16일 ~ 2022년 8월 25일 10일
+- 2022년 8월 29일 ~ 2022년 9월 8일 10일
+
 
 ## Winnerest
 - FE : 권영준, 조은지, 김다현
 - BE : 길성민, 백민석
 
+
 ## 사용 기술 
 - 프론트엔드 : JavaScript, React.js, Style Component
 - 백엔드 : Node.js, MySQL 8.0, Postman, Express 
 - 협업 툴 : Trello, Slack, Google Sheet
+
 
 ## 구현 기능 
 - 권영준 : 업로드 페이지, 공통 컴포넌트 (버튼, 모달창)
@@ -86,6 +92,6 @@
 ### 3. 마이 페이지
 
 - 카카오 프로필, 닉네임이 UI에 띄워지고 보드를 만들거나 해당 보드에 업로드한 사진을 확인할 수 있습니다.
-- 보드를 누르면 보드 하단에 보드 안에 들어있는 하단 핀(사진)들이 
+- 보드를 누르면 보드 안에 들어있는 핀(사진)들이 하단 UI에 띄워집니다.
 
 
