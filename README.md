@@ -79,14 +79,26 @@
 
 
 ## 조은지
+
+
+![로그인](https://blog.kakaocdn.net/dn/b4ltFv/btrLOfDdhTu/gcM727nxLSHC2CzwFBkvZ1/img.gif)
+
+
 ### 1. 로그인 페이지
 
 - 카카오 API를 이용해 로그인 페이지 구현, 자바스크립트 키를 이용해 개인 프로필, 닉네임, 이메일을 받아 해당 페이지를 회원가입할 수 있도록 했습니다.
 
 
+![메인 페이지](https://blog.kakaocdn.net/dn/WkWqx/btrLK0Hyyr9/KkfkN6HGdlVmrWjhyD8PUk/img.gif)
+
+
 ### 2. 메인 페이지
 
 -  라이브러리를 이용한 무한 스크롤 구현, 사진 클릭시 상세 페이지로 넘어갑니다
+
+
+![마이페이지](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fc8Ut75%2FbtrLNo1XYGE%2FKrl4INt2pdT1KF1yyYCnc0%2Fimg.gif)
+![마이페이지2](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fouwyo%2FbtrLK0A8OPq%2FkroKiuxrQlAkeJK1K5UUD1%2Fimg.gif)
 
 
 ### 3. 마이 페이지
