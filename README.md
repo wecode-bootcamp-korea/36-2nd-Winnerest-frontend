@@ -19,7 +19,7 @@
 
 
 ## 사용 기술 
-- 프론트엔드 : JavaScript, React.js, Style Component
+- 프론트엔드 : JavaScript, React.js, Styled-Components
 - 백엔드 : Node.js, MySQL 8.0, Postman, Express 
 - 협업 툴 : Trello, Slack, Google Sheet
 
