@@ -65,7 +65,7 @@
    - 선택한 리뷰에 해당하는 id를 가지고 POST 메서드를 이용하여 선택된 리뷰의 id를 서버에 보내는 방식으로 해결하였다.
 
 - 무한 스크롤
-   - 보통의 스크롤 기능만 이용하면 한 번만 휠을 움직일 시 엄청난 양의 이벤트가 발생하는데 발생되는 이벤트들을 제어하기 위해서 debounce, throttle 중 debounce 방법을 이용하여 이벤트를 제어하였다. (throttle하고 intersection-observer부터 사용할걸 그랬네요...)
+   - 보통의 스크롤 기능만 이용하면 한 번만 휠을 움직일 시 엄청난 양의 이벤트가 발생하는데 발생되는 이벤트들을 제어하기 위해서 debounce, throttle 중 debounce 방법을 이용하여 이벤트를 제어하였다.
    - [[JavaScript] 디바운스와 쓰로틀의 차이](https://velog.io/@plu457/JavaScript-%EB%94%94%EB%B0%94%EC%9A%B4%EC%8A%A4%EC%99%80-%EC%93%B0%EB%A1%9C%ED%8B%80%EC%9D%98-%EC%B0%A8%EC%9D%B4)
 
 - 팔로우 기능
