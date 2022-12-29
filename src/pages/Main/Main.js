@@ -7,9 +7,7 @@ import PinForMain from './PinForMain';
 
 const Main = () => {
   const navigate = useNavigate();
-  const token =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImlhdCI6MTY2MjEyMjE2MX0.j5a-YigS0uywWrn6mEs34Fqy9hWTTFIFcr2Js_PP1FE';
-
+  const token = localStorage.getItem('accessToken');
   const [items, setItems] = useState([]);
   const [page, setPage] = useState(0);
   const [loading, setLoading] = useState(false);
@@ -21,13 +19,14 @@ const Main = () => {
   const getItems = async () => {
     setLoading(true);
     await axios
-      .get(`http://10.58.7.159:3000/pins?pageSize=10&page=${page}`, {
+      .get(`http://localhost:8000/pins?pageSize=10&page=${page}`, {
         headers: {
           Authorization: token,
         },
       })
       .then(res => {
-        setItems(prevState => [...prevState, ...res.data.data]);
+        console.log(res);
+        setItems(prevState => [...res.data.data, ...prevState]);
       });
     setLoading(false);
   };

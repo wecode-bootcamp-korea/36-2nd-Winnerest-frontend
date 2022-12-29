@@ -13,10 +13,10 @@ const MyPage = () => {
   const [isModal, setIsModal] = useState(false);
   const [createBoardName, setCreateBoardName] = useState();
 
-  const token = localStorage.getItem('Token');
+  const token = localStorage.getItem('accessToken');
 
   useEffect(() => {
-    fetch(`http://10.58.7.159:3000/auth`, {
+    fetch(`http://localhost:8000/auth`, {
       headers: {
         'Content-Type': 'application/json',
         Authorization: token,

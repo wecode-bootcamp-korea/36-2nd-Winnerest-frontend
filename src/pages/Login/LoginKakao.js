@@ -5,19 +5,20 @@ import styled from 'styled-components';
 const LoginKakao = () => {
   const navigate = useNavigate();
   const { Kakao } = window;
+
   const getKakaoAuth = () => {
-    Kakao.init(process.env.REACT_APP_KAKAO_INIT_KEY);
+    Kakao.init('a0304de619571a5354825a802ecc5991');
     Kakao.Auth.login({
-      scope: 'profile_nickname, account_email ,profile_image',
+      scope: 'profile_nickname, profile_image, account_email',
       success: function (authObj) {
-        fetch('http://10.58.7.159:3000/auth/kakao-login', {
+        fetch('http://localhost:8000/auth/kakao-login', {
           method: 'GET',
           headers: { authorization: authObj.access_token },
         })
           .then(res => res.json())
           .then(data => {
             if (data.accessToken) {
-              localStorage.setItem('Token', data.accessToken);
+              localStorage.setItem('accessToken', data.accessToken);
               alert('로그인 되었습니다');
               navigate('/pins');
             } else {
